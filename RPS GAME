@@ -1,0 +1,31 @@
+print("welcome to RPS GAME\nLets play the game\nr for rock\np for paper\ns for scissors\nq for quit\n\n\n")
+import random
+total_point=0
+computer_point=0
+
+while True:
+  user=input("Enter your choice: ")
+  comp=random.choice(["r","p","s"])
+  print(f"  computer choice: {comp}")
+  if user not in ["r","p","s","q"]:
+    print("Invalid input")
+  elif user == comp:
+    print("Tie")
+  elif (user == "r" and comp == "s") or (user == "p" and comp == "r") or (user == "s" and comp == "p"):
+    print("You win")
+    total_point+=1
+  elif user=="q":
+    break
+  else:
+    print("You lose")
+    computer_point+=1
+  print("~"*20)
+print("\n\n","~"*30,"\nThanks for playing")
+print("Your point: ",total_point)
+print("Computer point: ",computer_point)
+if(total_point>computer_point):
+  print("You are winner")
+elif(total_point<computer_point):
+  print("Computer is winner")
+else:
+  print("Game is tie")
