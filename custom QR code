@@ -1,3 +1,5 @@
+#first install pip from terminal or shall using this -->pip install pillow<--
+
 import qrcode
 print("create your custom QRcode")
 
