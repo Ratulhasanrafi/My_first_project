@@ -1,0 +1,61 @@
+import os
+if (not os.path.exists("data")):
+  os.mkdir("data")
+
+print("welcome to data management system\nHere you can store employee data,student data,etc.\nLike:\nname:rafi\nRoll:01\nIn individual file(using ID)\n\n")
+
+def store(id):
+    data=None
+    print("\npress 'q' for quit")
+    while True:
+        key=input("\nEnter key: ")
+        if key=='q':
+            break
+        else:
+            value=input("Enter value: ")
+            data=f"{key} : {value}"
+            with open(f"data/{id}.txt","a") as file:
+              file.write(data + '\n')
+    return data
+
+
+
+
+
+def read_data(id):
+  try:
+      with open(f"data/{id}.txt", 'r') as file:
+          content = file.read()
+          return content
+  except FileNotFoundError:
+      return "file not found."
+
+
+
+
+def main():
+  while True:
+      print("Options: ")
+      print("1. Store or add data")
+      print("2. Read stored data")
+      print("3. Exit")
+
+
+      choice = input("Enter your choice (1/2/3): ")
+
+      if choice != '3':
+        id=int(input("Enter your id: "))
+      if choice == '1':
+          store(id)
+          print("Data stored successfully.\n")
+      elif choice == '2':
+          content = read_data(id)
+          print("Stored data:\n",content)
+      elif choice == '3':
+          print("Exiting...")
+          break
+      else:
+          print("Invalid choice. Please enter 1, 2, or 3.")
+
+if __name__ == "__main__":
+  main()
