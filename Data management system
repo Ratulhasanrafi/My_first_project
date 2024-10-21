@@ -2,25 +2,23 @@ import os
 if (not os.path.exists("data")):
   os.mkdir("data")
 
-print("welcome to data management system\nHere you can store employee data,student data,etc.\nLike:\nname:rafi\nRoll:01\nIn individual file(using ID)\n\n")
+print("welcome to data managment system\nHere you can store employee data,student data,etc.\nLike:\nname:rafi\nRoll:01\nIn individual file(using ID)\n\n")
+
+
+#data store part
 
 def store(id):
-    data=None
     print("\npress 'q' for quit")
     while True:
-        key=input("\nEnter key: ")
-        if key=='q':
+        data=input("\nEnter data: ")
+        if data=='q':
             break
         else:
-            value=input("Enter value: ")
-            data=f"{key} : {value}"
             with open(f"data/{id}.txt","a") as file:
-              file.write(data + '\n')
-    return data
+              file.write(data+"\n")
 
 
-
-
+#data read part
 
 def read_data(id):
   try:
@@ -31,7 +29,7 @@ def read_data(id):
       return "file not found."
 
 
-
+#executing part
 
 def main():
   while True:
@@ -39,10 +37,10 @@ def main():
       print("1. Store or add data")
       print("2. Read stored data")
       print("3. Exit")
-
+      
 
       choice = input("Enter your choice (1/2/3): ")
-
+     
       if choice != '3':
         id=int(input("Enter your id: "))
       if choice == '1':
@@ -57,5 +55,4 @@ def main():
       else:
           print("Invalid choice. Please enter 1, 2, or 3.")
 
-if __name__ == "__main__":
-  main()
+main()
