@@ -1,0 +1,55 @@
+import random
+
+
+def l(user):
+  return [int(i) for i in str(user)]
+
+
+def duplicate(user):
+  if len(l(user))==len(set(l(user))):
+    return False
+  else:
+    return True
+
+
+def check(user,comp):
+  poss_num=[0,0]
+  user=l(user)
+  comp=l(comp)
+  for i,j in zip(user,comp):
+    if i in comp:
+      poss_num[1]+=1
+      if i==j:
+        poss_num[0]+=1
+       
+  return poss_num
+
+while True:
+  comp=random.randint(1000,9999)
+  if duplicate(comp)==False:
+    break
+
+
+
+
+n=int(input("how many attempt do you want :"))
+i=1
+while i<n:
+  print(f"Attemp remind :{(n+1)-i}")
+  user=int(input("Enter a 4 digit non duplicate number: "))
+  if duplicate(user):
+    print("Please enter a non duplicate number")
+    continue
+
+  poss,num=check(user,comp)
+  print(f"your possition match {poss}\nYour number match {num}")
+  print("\n\n","~"*30)
+  if poss==4:
+    print("You won")
+    break
+  i+=1  
+
+  
+if poss !=4:
+  print("Oh.you lose.\n computer number is: ",comp)
+
