@@ -57,12 +57,10 @@ def i2():                 #in 2 in random position
 
 
 
-
-
 result=None
 while result=="continue" or result is None:  #create loop
   x=input("enter the derecion")
-  
+
 
   #create right derecion
   if x=="d":
@@ -80,9 +78,9 @@ while result=="continue" or result is None:  #create loop
          mat[j].remove(0)
       while len(mat[j])<=3:
         mat[j].insert(0,0)
-      
-      
-  
+
+
+
   #create left derecion
   if x=="a":
     for j in range(4):
@@ -99,8 +97,8 @@ while result=="continue" or result is None:  #create loop
          mat[j].remove(0)
       while len(mat[j])<=3:
         mat[j].insert(3,0)
-  
-  
+
+
   #create up derecion
   if x=="w":
     mat=rev(mat)
@@ -119,9 +117,9 @@ while result=="continue" or result is None:  #create loop
       while len(mat[j])<=3:
         mat[j].insert(3,0)
     mat=rev(mat)
-  
-  
-  
+
+
+
   #create down derecion
   if x=="s":
     mat=rev(mat)
@@ -141,12 +139,14 @@ while result=="continue" or result is None:  #create loop
         mat[j].insert(0,0)
     mat=rev(mat)
   i2()
-  print(mat,"\n\n~~~~~~~~~~~~~~~~")
+  for i in range(4):
+    print(mat[i])
+  print("\n~~~~~~~~~~~~~~~")
 
 
 
 
-  result=None               #check if game is over or not
+  #check if game is over or not
   for j in range(4):
     for i in range(4):
       if mat[j][i]==2048:
