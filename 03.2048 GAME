@@ -1,0 +1,175 @@
+import random
+
+
+
+#introdution
+print("""welcome to 2048 game
+use the arrow keys to move the tiles
+
+           w(up)
+  a(left)           d(right)
+           s(down)
+
+
+w for up
+a for left
+s for down
+d for right
+""")
+
+
+
+
+
+
+
+mat=[[0,0,0,0],   #create matrix 4x4
+     [0,0,0,0],
+     [0,0,0,0],
+     [0,0,0,0]]
+
+
+
+
+def rev(mat):           #create transpose of matrix
+  for j in range(3):
+    for i in range(1,4):
+      if i>j:
+        a=mat[j][i]
+        mat[j][i]=mat[i][j]
+        mat[i][j]=a
+  return mat
+
+
+
+
+
+def i2():                 #in 2 in random position
+  r=random.randint(0,3)
+  c=random.randint(0,3)
+  while(mat[r][c]!=0):
+    r=random.randint(0,3)
+    c=random.randint(0,3)
+  mat[r][c]=2
+
+
+
+
+
+
+
+
+result=None
+while result=="continue" or result is None:  #create loop
+  x=input("enter the derecion")
+  
+
+  #create right derecion
+  if x=="d":
+    for j in range(4):
+      for i in range(mat[j].count(0)):
+         mat[j].remove(0)
+      while len(mat[j])<=3:
+        mat[j].insert(0,0)
+    for j in range(4):
+      for i in range(3,0,-1):
+        if mat[j][i]==mat[j][i-1]:
+          mat[j][i]=mat[j][i-1]*2
+          mat[j][i-1]=0
+      for i in range(mat[j].count(0)):
+         mat[j].remove(0)
+      while len(mat[j])<=3:
+        mat[j].insert(0,0)
+      
+      
+  
+  #create left derecion
+  if x=="a":
+    for j in range(4):
+      for i in range(mat[j].count(0)):
+         mat[j].remove(0)
+      while len(mat[j])<=3:
+        mat[j].insert(3,0)
+    for j in range(4):
+      for i in range(3):
+        if mat[j][i]==mat[j][i+1]:
+          mat[j][i]=mat[j][i+1]*2
+          mat[j][i+1]=0
+      for i in range(mat[j].count(0)):
+         mat[j].remove(0)
+      while len(mat[j])<=3:
+        mat[j].insert(3,0)
+  
+  
+  #create up derecion
+  if x=="w":
+    mat=rev(mat)
+    for j in range(4):
+      for i in range(mat[j].count(0)):
+         mat[j].remove(0)
+      while len(mat[j])<=3:
+        mat[j].insert(3,0)
+    for j in range(4):
+      for i in range(3):
+        if mat[j][i]==mat[j][i+1]:
+          mat[j][i]=mat[j][i+1]*2
+          mat[j][i+1]=0
+      for i in range(mat[j].count(0)):
+         mat[j].remove(0)
+      while len(mat[j])<=3:
+        mat[j].insert(3,0)
+    mat=rev(mat)
+  
+  
+  
+  #create down derecion
+  if x=="s":
+    mat=rev(mat)
+    for j in range(4):
+      for i in range(mat[j].count(0)):
+         mat[j].remove(0)
+      while len(mat[j])<=3:
+        mat[j].insert(0,0)
+    for j in range(4):
+      for i in range(3,0,-1):
+        if mat[j][i]==mat[j][i-1]:
+          mat[j][i]=mat[j][i-1]*2
+          mat[j][i-1]=0
+      for i in range(mat[j].count(0)):
+         mat[j].remove(0)
+      while len(mat[j])<=3:
+        mat[j].insert(0,0)
+    mat=rev(mat)
+  i2()
+  print(mat,"\n\n~~~~~~~~~~~~~~~~")
+
+
+
+
+  result=None               #check if game is over or not
+  for j in range(4):
+    for i in range(4):
+      if mat[j][i]==2048:
+        result="win"
+  if result!="win":
+    for j in range(4):
+      for i in range(4):
+        if mat[j][i]==0:
+          result="continue"
+          break
+        if result!="continue":
+          try:
+            if mat[j][i]==mat[j][i+1]:
+              result="continue"
+              break
+            elif mat[j][i]==mat[j+1][i]:
+              result="continue"
+              break
+            else:
+              result="lose"
+          except IndexError:
+            pass
+
+
+if result=="win" or result=="lose":
+  print(result)
